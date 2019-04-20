@@ -1,5 +1,12 @@
 # CloudFlare Acces Allow
 
+Este repositorio contiene el escript **install.sh** que se encarga de actualizar el cortafuegos **ufw** para dar acceso solo a las direcciones IP de Cloudflare.
+
+
+<img src="./images/logo-cloudflare-dark.svg" width="150" height="150" />
+<img src="./images/digitalocean.svg" width="150" height="150" />
+<hr>
+
 Este escript descarga en el servidor las direcciones IP Versión 4 y 6 desde las cuales CloudFlare accede al servidor web.
 
 ## Motivación
@@ -45,3 +52,13 @@ $ ufw enable
 ```bash
 $ ./install.sh
 ```
+
+## Recomendación
+
+Se recomienda agrega un registro al **cron** del sistema que se ejecute a una hora de poco tráfico que se encarge de ejecutar el script **install.sh** con la finalidad de matener la lista de direcciones IPs de Cloudflare actualizadas con los últimos cambios que puedan llegar a aparecer.
+
+ejemplo
+```cron
+0 4 * * * /var/scripts/cloudflare/install.sh
+```
+éste registro del **cron** lanzará el script todos los días a las 04:00.
